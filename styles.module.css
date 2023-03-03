@@ -1,0 +1,54 @@
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px; 
+}
+
+  
+.card {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  margin-bottom: 30px; 
+}
+
+  
+  .card h3 {
+    margin-top: 0;
+  }
+  
+  .card p {
+    margin-bottom: 10px;
+  }
+  
+  .search-input {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 300px;
+    margin-right: 10px;
+  }
+  
+  
+  .button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .body {
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  
+  /* button:hover {
+    background-color: #0058c7;
+  } */
+  
