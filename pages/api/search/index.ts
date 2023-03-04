@@ -4,6 +4,10 @@ import courses from '../../../courses.json';
 import axios from "axios";
 
 interface Filter {
+  [key: string]: FilterOptions;
+}
+
+interface FilterOptions {
   $eq?: Number | String | Boolean;
   $ne?: Number | String | Boolean;
   $gt?: Number;
