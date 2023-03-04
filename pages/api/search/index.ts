@@ -4,14 +4,14 @@ import courses from '../../../courses.json';
 import axios from "axios";
 
 interface Filter {
-  $eq?: Number, String, Boolean;
-  $ne?: Number, String, Boolean;
+  $eq?: Number | String | Boolean;
+  $ne?: Number | String | Boolean;
   $gt?: Number;
   $gte?: Number;
   $lt?: Number;
   $lte?: Number;
-  $in?: String, Number;
-  $nin?: String, Number;
+  $in?: String | Number;
+  $nin?: String | Number;
 }
 
 async function vector(query: String) {
