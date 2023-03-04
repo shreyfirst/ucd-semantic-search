@@ -13,7 +13,11 @@ const Search = () => {
     const response = await fetch('/api/search', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ query: searchTerm })
+      body: JSON.stringify({ query: searchTerm, filters: {
+        "classNum": {
+          "$lt" : 200
+        }
+      } })
     })
     const data = await response.json()
     setCourses(data)
@@ -31,9 +35,10 @@ const Search = () => {
       <div className={styles.search}>
         {courses.map((course) => (
           <div key={course.id} className={styles.card}>
-            <h3>{course.data.title}</h3>
+            <h3>{course.data.id}: {course.data.title}</h3>
             <p>{course.data.description}</p>
             <p>{course.data.units} units</p>
+            <p>{course.data.prereqs}</p>
           </div>
         ))}
       </div>
