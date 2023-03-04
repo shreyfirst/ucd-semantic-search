@@ -3,6 +3,17 @@ import { sampleUserData } from '../../../utils/sample-data'
 import courses from '../../../courses.json';
 import axios from "axios";
 
+interface Filter {
+  $eq?: Number, String, Boolean;
+  $ne?: Number, String, Boolean;
+  $gt?: Number;
+  $gte?: Number;
+  $lt?: Number;
+  $lte?: Number;
+  $in?: String, Number;
+  $nin?: String, Number;
+}
+
 async function vector(query: String) {
   const options = {
     method: 'POST',
@@ -22,7 +33,7 @@ async function vector(query: String) {
     return error;
   });
 }
-async function cosine(vector: Array<number>) {
+async function cosine(vector: Array<number>, filter: Filter) {
   const options = {
     method: 'POST',
     url: 'https://pinecone-index-ucd-classes-98ce1f1.svc.us-east1-gcp.pinecone.io/query',
@@ -33,9 +44,7 @@ async function cosine(vector: Array<number>) {
     data: {
       "vector": vector,
       "topK": 30,
-      "filter": {
-            // "classNum": {"$lt": 250}
-      },
+      "filter": filter,
       "includeMetadata": true,
       "includeValues": false,
       "namespace": "descriptions"
@@ -56,7 +65,8 @@ const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
     
     const request_data = _req.body;
     const vector_arr = await vector(request_data["query"]);
-    const results = await cosine(vector_arr);
+    const filters = request_data["filters"] || {};
+    const results = await cosine(vector_arr, filters);
 
     let response = []
 
