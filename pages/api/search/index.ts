@@ -67,7 +67,8 @@ async function cosine(vector: Array<number>, filter: Filter) {
 const handler = async (_req: NextApiRequest, res: NextApiResponse) => {
   try {
     
-    const request_data = _req.body;
+    const query_data = _req.query
+    const request_data = JSON.parse(query_data["data"]);
     const vector_arr = await vector(request_data["query"]);
     const filters = request_data["filters"] || {};
     const results = await cosine(vector_arr, filters);

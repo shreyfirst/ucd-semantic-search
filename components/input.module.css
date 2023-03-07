@@ -1,0 +1,10 @@
+.input {
+    position: absolute;
+    width: 240px;
+    height: 34px;
+    left: 212px;
+    top: 206px;
+
+    background: #FFF1BF;
+    border-radius: 9px;
+}

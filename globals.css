@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.input {
+    /* position: absolute; */
+    width: 400px;
+    /* height: 50px; */
+    /* left: 212px;
+    top: 206px; */
+
+    background-color: #FFF1BF !important;
+    border-radius: 9px;
+    
+}
+
+.button {
+    /* position: absolute; */
+/* width: 63px; */
+/* height: 50px; */
+/* left: 457px; */
+/* top: 206px; */
+
+background: #FFE073 !important;
+border-radius: 9px;
+
+}
+
+.my-masonry-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    /* margin-left: -30px;  */
+    width: auto;
+  }
+  .my-masonry-grid_column {
+    /* padding-left: 30px; gutter size */
+    background-clip: padding-box;
+  }
+  
+  /* Style your items */
+  .my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+    background: grey;
+    margin-bottom: 30px;
+  }
+
+@media only screen and (max-width: 675px) {  
+    .body {
+      display: none !important;
+     }
+    .mobile{
+        text-align: center;
+        height: 100vh !important;
+        display: flex !important;
+        justify-content: center;
+        align-items: center;
+    }
+    }
+
+.mobile{
+    display:none;
+}
+.flexy {}
+
+.cardfont {
+    font-family: 'Inria Sans', sans-serif !important;
+    color: #19171c  !important;
+    /* font-size: 1rem !important; */
+}
+
+.font {
+    font-family: 'Inria Sans', sans-serif !important;
+    color: #19171c  !important;
+    font-size: 1.5rem !important; /* 18px */
+    /* line-height: 1.75rem !important;  */
+}
+
+.body {
+
+    background-color: rgb(28 25 23);
+    /* height: 100vh; */
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+}
