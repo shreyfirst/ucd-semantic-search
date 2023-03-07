@@ -32,19 +32,19 @@ const ReactCard = (props: Props) => (
       <Typography className="cardfont" level="body2"> {props.description} </Typography>
 
       
-        <Grid container spacing={2} sx={{ flexGrow: 1 }} style={{"margin-top": "0.5rem"}}>
-        <Grid xs={4}>
+        <Grid container={true} spacing={2} sx={{ flexGrow: 1 }} style={{"margin-top": "0.5rem"}}>
+        <Grid xs={4} component="div">
         <Typography className="cardfont" level="h1" fontSize="sm" sx={{ mb: 0.5 }}>
         { props.units + " "}units
       </Typography>
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={4} component="div">
         <Typography className="cardfont" level="h1" fontSize="sm" sx={{ mb: 0.5 }}>
        {/* { props.name } */}
        { props.courseid }
       </Typography>
         </Grid>
-        <Grid xs={4}>
+        <Grid xs={4} component="div">
         <Typography className="cardfont" level="h1" fontSize="sm" sx={{ mb: 0.5 }}>
        {/* { props.name } */}
        See prereqs
