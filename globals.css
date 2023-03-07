@@ -74,6 +74,49 @@ border-radius: 9px;
     font-size: 1.5rem !important; /* 18px */
     /* line-height: 1.75rem !important;  */
 }
+.fontloading {
+    font-family: 'Inria Sans', sans-serif !important;
+    color: #FFE073  !important;
+    font-size: 1.5rem !important; /* 18px */
+    /* line-height: 1.75rem !important;  */
+}
+
+.css-mwmswi-JoyCircularProgress-root {
+    --Icon-fontSize: calc(0.4 * var(--_root-size));
+    --CircularProgress-trackColor:#FFE073  !important;
+    --CircularProgress-progressColor:rgb(28 25 23) !important;
+    --CircularProgress-percent: 25;
+    --CircularProgress-linecap: round;
+    --CircularProgress-trackThickness: 3px;
+    --CircularProgress-progressThickness: 3px;
+    --_root-size: var(--CircularProgress-size, 40px);
+    --_thickness-diff: calc(var(--CircularProgress-trackThickness) - var(--CircularProgress-progressThickness));
+    --_inner-size: calc(var(--_root-size) - 2 * var(--variant-borderWidth, 0px));
+    --_outlined-inset: max(var(--CircularProgress-trackThickness), var(--CircularProgress-progressThickness));
+    width: var(--_root-size);
+    height: var(--_root-size);
+    border-radius: var(--_root-size);
+    margin: var(--CircularProgress-margin);
+    box-sizing: border-box;
+    display: -webkit-inline-box;
+    display: -webkit-inline-flex;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-flex-shrink: 0;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    position: relative;
+    color: var(--joy-palette-primary-softColor, var(--joy-palette-primary-600, #054DA7));
+    --variant-borderWidth: 0px;
+}
 
 .body {
 

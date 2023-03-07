@@ -15,33 +15,46 @@ const AboutPage = () => {
   const [query, setQuery] = useState("");
   const [data, setData] = useState([]);
   const [height, setHeight] = useState("100vh");
+  const [loading, setLoading] = useState(false);
+  const [lastSearch, setlastSearch] = useState(null);
 
-  const columnsCountBreakPoints = {default: 4, 350: 1, 1100: 2, 1500: 3}
+  const columnsCountBreakPoints = { default: 4, 350: 1, 1100: 2, 1500: 3 }
 
-  
-
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      runRequest(query)
+    }
+  }
 
   useEffect(() => {
-      // console.log("hsefsd")
+    // console.log("hsefsd")
   }, [data]);
 
   async function runRequest(event) {
 
+    if (query == lastSearch) {
+      return 
+    }
+
+    setLoading(true)
+
     var options = {
       method: 'GET',
       url: `${window.location.origin}/api/search`,
-      params: {data:JSON.stringify({query: query, filters: {classNum: {"$lt": 190}}})},
-      headers: {'Content-Type': 'application/json' }
+      params: { data: JSON.stringify({ query: query, filters: { classNum: { "$lt": 190 } } }) },
+      headers: { 'Content-Type': 'application/json' }
     };
-    
+
     await axios.request(options).then(async function (response) {
       await setData(response.data)
       setHeight("auto")
+      setLoading(false)
+      setlastSearch(query);
       console.log(response.data);
     }).catch(function (error) {
       console.error(error);
     });
-    
+
   }
 
 
@@ -49,11 +62,11 @@ const AboutPage = () => {
     <Layout>
 
       <AnimateHeight
-  duration={ 500 }
-  height={ height }
-  className="min-w-screen content-center flex flex-wrap gap-2 place-content-center text-xl ">
+        duration={500}
+        height={height}
+        className="min-w-screen content-center flex flex-wrap gap-2 place-content-center text-xl ">
 
-      <div className="p-10 flex flex-wrap gap-2">
+        <div className="p-10 flex flex-wrap gap-2">
 
           <div className="">
             <Input
@@ -67,16 +80,19 @@ const AboutPage = () => {
               }}
               variant="solid"
               className="input font"
-              onChange={(event)=>{
+              onChange={(event) => {
                 setQuery(event.target.value)
               }}
+              onKeyDown={handleKeyDown}
             />
           </div>
           <div className="h-fit">
-            <Button className="button font" onClick={function () { runRequest(query) }} size="xl">Search</Button>
+              {
+                loading ? <Button loading className="button fontloading" onClick={function () { runRequest(query) }} size="xl">Search</Button> : <Button className="button font" onClick={function () { runRequest(query) }} size="xl">Search</Button>
+              }
           </div>
 
-      </div>
+        </div>
       </AnimateHeight>
 
       <div style={{
@@ -90,18 +106,19 @@ const AboutPage = () => {
         // "align-items": "flex-start",
         // gap: "1rem"
       }}>
-                  
-                  <Masonry breakpointCols={columnsCountBreakPoints}
-                    className="my-masonry-grid"
-                    columnClassName="my-masonry-grid_column"
-                  
-                  >      {data.map((course)=>{
-        return(
-        <Card key={course.id} name={course.data.title} units={course.data.units} description={course.data.description} courseid={course.id}  />
-      )})}
-                      </Masonry>
-        </div>
-        
+
+        <Masonry breakpointCols={columnsCountBreakPoints}
+          className="my-masonry-grid"
+          columnClassName="my-masonry-grid_column"
+        >
+          {data.map((course) => {
+            return (
+              <Card key={course.id} name={course.data.title} units={course.data.units} description={course.data.description} courseid={course.id} />
+            )
+          })}
+        </Masonry>
+      </div>
+
     </Layout >
   )
 }
