@@ -60,6 +60,12 @@ border-radius: 9px;
 .mobile{
     display:none;
 }
+
+.MuiCircularProgress-svg {
+    --CircularProgress-progressColor: #19171c;
+    --CircularProgress-trackColor: #FFE073;
+}
+
 .flexy {}
 
 .cardfont {
