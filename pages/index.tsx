@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { useState, useEffect } from 'react'
 import Layout from "../components/Layout";
 import Card from "../components/Card";
+import BouncingButton from "../components/BouncingButton";
 import axios from "axios";
 import Masonry from 'react-masonry-css'
 import AnimateHeight from "react-animate-height";
@@ -17,6 +18,8 @@ const AboutPage = () => {
   const [height, setHeight] = useState("100vh");
   const [loading, setLoading] = useState(false);
   const [lastSearch, setlastSearch] = useState(null);
+  const [screensavers, setScreensavers] = useState(["Parenting", "Obama", "Drake", "Tractors", "Opioids", "Venture Capital", "Cancel culture", "Cardi B", "Kafka", "TED Talks"]);
+  const [inputText, setInputText] = useState("");
 
   const columnsCountBreakPoints = { default: 4, 350: 1, 1100: 2, 1500: 3 }
 
@@ -26,13 +29,27 @@ const AboutPage = () => {
     }
   }
 
+  const animation = (text) => {
+    setQuery(text.toString().toLowerCase())
+    setInputText(text.toString().toLowerCase())
+    runRequest(text.toString().toLowerCase(), text) 
+  }
+
+
   useEffect(() => {
     // console.log("hsefsd")
   }, [data]);
 
-  async function runRequest(event) {
+  async function runRequest(event, text) {
 
-    if (query == lastSearch) {
+    let search_data = ""
+    if (text) {
+      search_data = text
+    } else {
+      search_data = query
+    }
+
+    if (search_data == lastSearch) {
       return 
     }
 
@@ -41,7 +58,7 @@ const AboutPage = () => {
     var options = {
       method: 'GET',
       url: `${window.location.origin}/api/search`,
-      params: { data: JSON.stringify({ query: query, filters: { classNum: { "$lt": 190 } } }) },
+      params: { data: JSON.stringify({ query: search_data, filters: { classNum: { "$lt": 190 } } }) },
       headers: { 'Content-Type': 'application/json' }
     };
 
@@ -49,7 +66,7 @@ const AboutPage = () => {
       await setData(response.data)
       setHeight("auto")
       setLoading(false)
-      setlastSearch(query);
+      setlastSearch(search_data);
       console.log(response.data);
     }).catch(function (error) {
       console.error(error);
@@ -60,7 +77,13 @@ const AboutPage = () => {
 
   return (
     <Layout>
-
+    <div className="screensaver-container">
+      {screensavers.map((screensaver) => (
+        <BouncingButton text={screensaver} onChangeText={function () { 
+          animation(screensaver)
+        }} />
+      ))}
+    </div>
       <AnimateHeight
         duration={500}
         height={height}
@@ -72,7 +95,7 @@ const AboutPage = () => {
             <Input
               // color="warning"
               disabled={false}
-              placeholder="Explore new possibilities"
+              placeholder="Search, with magic"
               size="xl"
               style={{
                 "height": "100%",
@@ -84,11 +107,12 @@ const AboutPage = () => {
                 setQuery(event.target.value)
               }}
               onKeyDown={handleKeyDown}
+              value={inputText}
             />
           </div>
           <div className="h-fit">
               {
-                loading ? <Button loading className="button fontloading" onClick={function () { runRequest(query) }} size="xl">Search</Button> : <Button className="button font" onClick={function () { runRequest(query) }} size="xl">Search</Button>
+                loading ? <Button loading className="button fontloading" onClick={function () { runRequest(query, null) }} size="xl">Search</Button> : <Button className="button font" onClick={function () { runRequest(query, null) }} size="xl">Search</Button>
               }
           </div>
 

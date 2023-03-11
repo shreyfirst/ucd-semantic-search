@@ -80,6 +80,14 @@ border-radius: 9px;
     font-size: 1.5rem !important; /* 18px */
     /* line-height: 1.75rem !important;  */
 }
+
+.title {
+    font-family: 'Cabin', sans-serif !important;
+    color: #19171c  !important;
+    font-size: 1.5rem !important; /* 18px */
+    /* line-height: 1.75rem !important;  */
+}
+
 .fontloading {
     font-family: 'Inria Sans', sans-serif !important;
     color: #FFE073  !important;
