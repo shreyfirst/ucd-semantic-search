@@ -6,13 +6,21 @@ type Props = {
   onChangeText: () => void
 }
 
+const generateRandomNumber = () => {
+  let randomNumber = Math.random() * 4 - 2; // generates a number between -2 and 2
+  if (randomNumber === 0) { // if the number is 0, generate a new number
+    return generateRandomNumber();
+  }
+  return randomNumber;
+}
+
 const DvdScreensaver = (props: Props) => {
   const ref = useRef<HTMLButtonElement>(null)
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [direction, setDirection] = useState({
-    x: Math.round(Math.random()) * 2 - 1,
-    y: Math.round(Math.random()) * 2 - 1,
-  });  
+    x: generateRandomNumber(),
+    y: generateRandomNumber(),
+  }); 
   const [color, setColor] = useState<string>("");
 
   useEffect(() => {
@@ -23,6 +31,7 @@ const DvdScreensaver = (props: Props) => {
       });
       setColor(getRandomPastelColor());
     };
+    handleResize();
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -53,9 +62,9 @@ const DvdScreensaver = (props: Props) => {
   }, [position, direction]);
 
   const getRandomPastelColor = () => {
-    const hue = Math.floor(Math.random() * 360);
-    const saturation = Math.floor(Math.random() * 31) + 70; // 70-100
-    const lightness = Math.floor(Math.random() * 31) + 70; // 70-100
+    const hue = Math.floor(Math.random() * 60);
+    const saturation = Math.floor(Math.random() * 31) + 60; // 70-100
+    const lightness = Math.floor(Math.random() * 31) + 60; // 70-100
     return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
   };
 

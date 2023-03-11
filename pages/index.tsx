@@ -19,7 +19,6 @@ const AboutPage = () => {
   const [loading, setLoading] = useState(false);
   const [lastSearch, setlastSearch] = useState(null);
   const [screensavers, setScreensavers] = useState(["Parenting", "Obama", "Drake", "Tractors", "Opioids", "Venture Capital", "Cancel culture", "Cardi B", "Kafka", "TED Talks"]);
-  const [inputText, setInputText] = useState("");
 
   const columnsCountBreakPoints = { default: 4, 350: 1, 1100: 2, 1500: 3 }
 
@@ -31,7 +30,6 @@ const AboutPage = () => {
 
   const animation = (text) => {
     setQuery(text.toString().toLowerCase())
-    setInputText(text.toString().toLowerCase())
     runRequest(text.toString().toLowerCase(), text) 
   }
 
@@ -107,7 +105,7 @@ const AboutPage = () => {
                 setQuery(event.target.value)
               }}
               onKeyDown={handleKeyDown}
-              value={inputText}
+              value={query}
             />
           </div>
           <div className="h-fit">
