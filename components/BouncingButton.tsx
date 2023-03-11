@@ -16,7 +16,7 @@ const generateRandomNumber = () => {
 
 const DvdScreensaver = (props: Props) => {
   const ref = useRef<HTMLButtonElement>(null)
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: generateRandomNumber(), y: generateRandomNumber() });
   const [direction, setDirection] = useState({
     x: generateRandomNumber(),
     y: generateRandomNumber(),
